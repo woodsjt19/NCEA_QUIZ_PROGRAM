@@ -1,0 +1,20 @@
+---FUNCTIONS---
+- function for checking if the users input is valid (for multichoice questions)
+- make function for running a question with parameters question, answer, and points given (for text answers) (also return the point amount)
+- make another function for checking validity of input for multichoice questions
+
+--VARIABLES--
+- user input variable to check against the answer
+- points variable for each user (inside each user struct)
+- question prompt variable (passed to question function)
+
+---OTHER---
+- make struct for each user with name, points, and team
+
+
+---MAIN---
+- ask how many players there will be + create that many user structs
+- ask for each users name + set each structs name variable to that
+- cycle through each player, asking a question to each and giving points accordingly
+- at the end, print the amount of points each player got and which player came first
+- MAKE SURE TO HANDLE TIES
