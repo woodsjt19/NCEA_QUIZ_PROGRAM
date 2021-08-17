@@ -11,7 +11,7 @@
 
 //---FUNCTIONS---//
 //MULTICHOICE CHECKER (note: im writing this at 2am, if you dont understand this when you wake up tough luck lmao)
-char multi(char* prompt){ //note: the reason answer is an integer is because its multichoice, possible answers are 1, 2, 3, 4
+char* multi(char* prompt){ //note: the reason answer is an integer is because its multichoice, possible answers are 1, 2, 3, 4
     for(;;){
         printf("%s\n", prompt);
         char userprompt[2];
@@ -47,20 +47,21 @@ char multi(char* prompt){ //note: the reason answer is an integer is because its
 }
 
 int question(char* prompt, char* answer, int qtype, int points){
-    char userprompt;
+    char* userprompt;
     if(qtype == 1){ //codeblock for doing multichoice questions
         userprompt = multi(prompt);
-        if(strcmp(userprompt, answer) == answer){
+        if(strcmp(userprompt, answer) == 0){
             printf("Correct!\n");
             return points;
         }
         else{
-            print("incorrect\n");
+            printf("incorrect\n");
             return 0;
         }
     } // well thats the easy bit done prolly, good luck awake me lmaoooooo
 }
 
 int main(){
-    question("Question\n");
+    int thingy = question("ans A\n", "A", 1, 3);
+    printf("%d\n", thingy);
 }
