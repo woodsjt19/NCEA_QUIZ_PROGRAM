@@ -50,7 +50,7 @@ int question(char* prompt, char* answer, int qtype, int points){
     }
     if(qtype == 1){    //Block for dealing with non-multichoice questions
         printf("%s\n", prompt);
-        char uinput[100]; //i know this is inefficient, but comparing strings when one's made with malloc() really doesnt work
+        char uinput[100]; //i know this is inefficient, but the better method i tried broke ;-;
         int buffercheck = 0;
         fgets(uinput, 100, stdin);
         for(int x = 0; x<strlen(uinput); x++){
@@ -58,7 +58,7 @@ int question(char* prompt, char* answer, int qtype, int points){
                 buffercheck = 1;
             }
             else{
-                uinput[x] = tolower(uinput[x]);
+                uinput[x] = tolower(uinput[x]); //pretty much makes the string lowercase
             }
         }
         if(buffercheck == 0){
