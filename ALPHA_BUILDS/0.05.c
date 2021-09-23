@@ -50,23 +50,23 @@ int question(char* prompt, char* answer, int qtype, int points){
     }
     if(qtype == 1){    //Block for dealing with non-multichoice questions
         printf("%s\n", prompt);
-        char uinput[100]; //i know this is inefficient, but the better method i tried broke ;-;
-        int buffercheck = 0;
-        fgets(uinput, 100, stdin);
-        for(int x = 0; x<strlen(uinput); x++){
-            if(uinput[x] == '\n'){
+        char u_input[100];
+        int buffercheck = 0; //same buffercheck function as on line 85, it used to be it's own function but then i found out it broke on windows for some reason
+        fgets(u_input, 100, stdin);
+        for(int x = 0; x<strlen(u_input); x++){ //loop for simultaneously checking if the user has overloaded the input buffer and makes the string lowercase aswell
+            if(u_input[x] == '\n'){
                 buffercheck = 1;
             }
             else{
-                uinput[x] = tolower(uinput[x]); //pretty much makes the string lowercase
+                u_input[x] = tolower(u_input[x]); //pretty much makes the string lowercase
             }
         }
         if(buffercheck == 0){
             while((getchar()) != '\n');
         }
 
-        uinput[strlen(uinput) -1] = 0;
-        if(strcmp(uinput, answer) == 0){
+        u_input[strlen(u_input) -1] = 0;
+        if(strcmp(u_input, answer) == 0){
             printf("Correct!\nYou got %d points!\n", points);
             return points;
         }
@@ -81,19 +81,19 @@ int question(char* prompt, char* answer, int qtype, int points){
 int main(){
     int points = 0;
     printf("Welcome to the quiz, what's your name?\n");
-    char uname[100]; // I'd ideally like to keep this in a function, but I tried and its really weird with windows but fine on linux.
-    int buffercheck = 0;
-    fgets(uname, 100, stdin);
-    for(int x = 0; x<strlen(uname); x++){
-        if(uname[x] == '\n'){ //basically check if theres a newline in the string grabbed from input buffer to check if the users entered more than max characters
+    char u_name[100]; // I'd ideally like to keep this in a function, but I tried and its really weird with windows but fine on linux.
+    int buffercheck = 0; //This variable is to check if the user has overloaded the input buffer in fgets
+    fgets(u_name, 100, stdin);
+    for(int x = 0; x<strlen(u_name); x++){
+        if(u_name[x] == '\n'){ //basically check if theres a newline in the string grabbed from input buffer to check if the users entered more than max characters
             buffercheck = 1;
         }
     }
     if(buffercheck == 0){
-        while((getchar()) != '\n'); //if the user has inputted more than input buffer, clear the rest by grabbing characters until newline
+        while((getchar()) != '\n'); //if the user has inputted more than input buffer, clear the rest by grabbing characters until theres a newline
     }
-    uname[strlen(uname) -1] = 0; //clear the last character in uinput to delete any newlines
-    printf("Hello, %s\n", uname);
+    u_name[strlen(u_name) -1] = 0; //clear the last character in u_input to delete any newlines
+    printf("Hello, %s\n", u_name);
 
     //questions
     points += question("Which country is the company Dodge from?\nA: Australia\nB: Germany\nC: America\nD: England\n", "C", 0, 1);
@@ -101,8 +101,6 @@ int main(){
     points += question("What is the oldest car brand?\nA: Ford\nB: Mercedes-Benz\nC: Nissan/Datsun\nD: BMW\n", "B", 0, 3);
     points += question("Which of these cars had the RB26DETT engine in it stock?\nA: Nissan Skyline R32\nB: Nissan 350Z\nC: Toyota A80 Supra\nD: Mazda RX-7 FC\n", "A", 0, 4);
     points += question("How many valves did the RB26DETT's cylinder head have in it?\nA:8\nB:16\nC:24\nD:36", "C", 0, 5);
-    //add more questions here
 
-    //
-    printf("The quiz is over! you got %d points!", points);
+    printf("The quiz is over! you got %d points!", points); // tell the user how many points they got
 }
